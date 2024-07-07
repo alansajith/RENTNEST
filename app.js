@@ -30,6 +30,11 @@ app.get("/listings", async (req, res) => {
   res.render("index.ejs", { alllistings });
 });
 
+//create route
+app.get("/listings/new", (req, res) => {
+  res.render("new.ejs");
+});
+
 //show Route
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
