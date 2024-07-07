@@ -1,7 +1,6 @@
-const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
-const listing = require("./models/listing.js");
+const initdata = require("./data.js");
+const listing = require("../models/listing.js");
 
 main()
   .catch((err) => console.log(err))
@@ -13,6 +12,9 @@ async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/RENTNEST");
 }
 
-app.listen(8080, () => {
-  console.log("Server is Listening on port 8080");
-});
+const initDB = async () => {
+  await listing.insertMany(initdata.data);
+  console.log("Data is initialized");
+};
+
+initDB();

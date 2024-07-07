@@ -6,12 +6,17 @@ const listingSchema = new schema({
     type: String,
     required: true,
   },
-  descrp: {
+  description: {
     type: String,
   },
   image: {
     type: String,
-    set: v === " " ? "https://www.google.com/url?sa=i&url=https%3A%2F%2Fsalonlfc.com%2Fimage-not-found-2%2F&psig=AOvVaw0hOCXTa0LRBjMI6bUDJb_G&ust=1720444075120000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCJja7-L_lIcDFQAAAAAdAAAAABAE" : v,
+    default:
+      "https://images.fineartamerica.com/images-medium-large-5/two-palm-trees-on-an-exotic-beach-in-gerisima.jpg",
+    set: (v) =>
+      v === " "
+        ? "https://images.fineartamerica.com/images-medium-large-5/two-palm-trees-on-an-exotic-beach-in-gerisima.jpg"
+        : v,
   },
   price: {
     type: Number,
