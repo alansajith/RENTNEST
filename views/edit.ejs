@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=indlist.title%></title>
+  </head>
+  <body>
+    <h3>Edit Your listing</h3>
+    <form>
+      <p>
+        Title:
+        <input
+          name="listing[title]"
+          placeholder="<%=indlist.title%>"
+          type="text"
+        />
+      </p>
+
+      <p>
+        Description:<br />
+        <textarea placeholder="<%= indlist.description%> %>"></textarea>
+      </p>
+
+      <p>
+        Image:
+        <input
+          name="listing[image]"
+          placeholder="<%=indlist.image%>"
+          type="text"
+        />
+      </p>
+
+      <p>
+        Price:
+        <input
+          name="listing[price]"
+          placeholder="<%=indlist.price%>"
+          type="number"
+        />
+      </p>
+
+      <p>
+        Location:
+        <input
+          name="listing[location]"
+          placeholder="<%=indlist.location%>"
+          type="text"
+        />
+      </p>
+
+      <p>
+        Country:
+        <input
+          name="listing[country]"
+          placeholder="<%=indlist.country%>"
+          type="text"
+        />
+      </p>
+      <button>Enter</button>
+    </form>
+  </body>
+</html>

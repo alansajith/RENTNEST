@@ -35,11 +35,19 @@ app.get("/listings/new", (req, res) => {
   res.render("new.ejs");
 });
 
+
 //show Route
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
   let details = await listing.findById(id);
   res.render("show.ejs", { details });
+});
+
+//edit route
+app.get("/listings/:id/edit", async(req, res) => {
+  let { id } = req.params;
+   let indlist = await listing.findById(id);
+  res.render("edit.ejs", { indlist});
 });
 
 //create route
