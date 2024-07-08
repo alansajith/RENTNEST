@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%=details.title%></title>
+    <link rel="stylesheet" href="/public/style.css">
   </head>
   <body>
-    <h3>Listing Details</h3>
+    <h3 >Listing Details</h3>
     <ul>
       <li><%=details.title%></li>
       <li><%=details.description%></li>
@@ -16,6 +17,10 @@
     </ul>
     <form method="get" action="/listings/<%=details._id%>/edit">
       <button>Edit</button>
+    </form>
+    <br />
+    <form method="post" action="/listings/<%=details._id%>?_method=DELETE">
+      <button>Delete</button>
     </form>
   </body>
 </html>
