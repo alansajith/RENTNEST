@@ -7,44 +7,36 @@
   </head>
   <body>
     <h3>Edit Your listing</h3>
-    <form>
+    <form method="post" action="/listings/<%=indlist._id%>?_method=PUT">
       <p>
         Title:
         <input
           name="listing[title]"
-          placeholder="<%=indlist.title%>"
           type="text"
+          value="<%= indlist.title%>"
         />
       </p>
 
       <p>
         Description:<br />
-        <textarea placeholder="<%= indlist.description%> %>"></textarea>
+        <textarea><%= indlist.description%></textarea>
       </p>
 
       <p>
         Image:
-        <input
-          name="listing[image]"
-          placeholder="<%=indlist.image%>"
-          type="text"
-        />
+        <input name="listing[image]" value="<%=indlist.image%>" type="text" />
       </p>
 
       <p>
         Price:
-        <input
-          name="listing[price]"
-          placeholder="<%=indlist.price%>"
-          type="number"
-        />
+        <input name="listing[price]" value="<%=indlist.price%>" type="number" />
       </p>
 
       <p>
         Location:
         <input
           name="listing[location]"
-          placeholder="<%=indlist.location%>"
+          value="<%=indlist.location%>"
           type="text"
         />
       </p>
@@ -53,7 +45,7 @@
         Country:
         <input
           name="listing[country]"
-          placeholder="<%=indlist.country%>"
+          value="<%=indlist.country%>"
           type="text"
         />
       </p>
