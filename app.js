@@ -30,7 +30,7 @@ app.get("/listings", async (req, res) => {
   res.render("index.ejs", { alllistings });
 });
 
-//create route
+//new route
 app.get("/listings/new", (req, res) => {
   res.render("new.ejs");
 });
@@ -44,6 +44,7 @@ app.get("/listings/:id", async (req, res) => {
   res.render("show.ejs", { details });
 });
 
+//create route
 app.post("/listings", async (req, res) => {
   let { title, description, image, price, location, country } = req.body;
   let newlisting = new listing({
