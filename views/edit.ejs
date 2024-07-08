@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%=indlist.title%></title>
-  </head>
+<% layout("/Layouts/boilerplate")%>
   <body>
     <h3>Edit Your listing</h3>
     <form method="post" action="/listings/<%=indlist._id%>?_method=PUT">
@@ -52,4 +46,4 @@
       <button>Enter</button>
     </form>
   </body>
-</html>
+

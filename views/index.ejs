@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RESTNEST</title>
-    
-  </head>
+<% layout("/Layouts/boilerplate")%>
   <body class="bodyindex">
-    <h2 ]>All listings</h2>
     <form method="get" action="/listings/new">
         <button>Create New Listing</button>
     </form>
-    <hr>
     <ul>
       <%for(let listing of alllistings){%>
       <li><a href="/listings/<%=listing._id%>"><%=listing.title%></a></li>
       <%}%>
     </ul>
   </body>
-</html>
+
