@@ -35,6 +35,8 @@ app.get("/listings/new", (req, res) => {
   res.render("new.ejs");
 });
 
+
+
 //show Route
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
@@ -42,4 +44,17 @@ app.get("/listings/:id", async (req, res) => {
   res.render("show.ejs", { details });
 });
 
-
+app.post("/listings", async (req, res) => {
+  let { title, description, image, price, location, country } = req.body;
+  let newlisting = new listing({
+    title: title,
+    description: description,
+    image: image,
+    price: price,
+    location: location,
+    country: country,
+  });
+  await newlisting.save();
+  console.log("New listing is added");
+  res.redirect("/listings");
+});
