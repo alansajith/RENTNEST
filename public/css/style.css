@@ -1,3 +1,18 @@
-.container {
-    background-color: burlywood;
+.navbar {
+  height: 5rem;
+  background-color: rgb(255, 255, 255);
+}
+.fa-compass {
+  color: rgb(101, 172, 163);
+}
+.nav-link {
+  color: rgb(0, 0, 0) !important;
+}
+.f-info {
+  text-align: center;
+  background-color: rgb(194, 199, 199);
+}
+.f-info-terms a {
+  text-decoration: none;
+  color: black;
 }
