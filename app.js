@@ -34,6 +34,11 @@ app.get("/listings", async (req, res) => {
   res.render("index.ejs", { alllistings });
 });
 
+//Home
+app.get("/", (req, res) => {
+  res.send("Page not made yet...will get back aftersometime");
+});
+
 //new route
 app.get("/listings/new", (req, res) => {
   res.render("new.ejs");
