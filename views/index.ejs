@@ -1,12 +1,10 @@
 <% layout("/Layouts/boilerplate")%>
-  <body class="bodyindex">
-    <form method="get" action="/listings/new">
-        <button>Create New Listing</button>
-    </form>
-    <ul>
-      <%for(let listing of alllistings){%>
-      <li><a href="/listings/<%=listing._id%>"><%=listing.title%></a></li>
-      <%}%>
-    </ul>
-  </body>
-
+<h5>All Listings</h5>
+<body class="bodyindex">
+  <form method="get" action="/listings/new"></form>
+  <ul>
+    <%for(let listing of alllistings){%>
+    <li><a href="/listings/<%=listing._id%>"><%=listing.title%></a></li>
+    <%}%>
+  </ul>
+</body>
