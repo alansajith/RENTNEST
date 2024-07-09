@@ -26,13 +26,12 @@
 }
 .f-info-socials {
   width: 100%;
-  margin-bottom: 1rem;
-
+  margin-top: 1rem;
   font-size: larger;
 }
 .f-info-terms {
   width: 100%;
-  margin-bottom: 1rem;
+  
 }
 .f-info-socials i {
   margin-right: 1.2rem;
@@ -55,6 +54,28 @@
 .card-body {
   padding: 0px !important;
 }
-.card-text p {
-  font-weight: 400 !important;
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+.card {
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.btn {
+  width: 100%;
+}
+.h5 {
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container {
+  flex: 1;
 }

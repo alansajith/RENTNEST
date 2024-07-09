@@ -6,12 +6,14 @@
   <div class="row">
     <%for(let listing of alllistings){%>
     <div class="card" style="width: 20rem">
-      <img
-        src="<%=listing.image%>"
-        class="card-img-top"
-        alt="listings_image"
-        style="height: 20rem"
-      />
+      <a href="/listings/<%=listing._id%>">
+        <img
+          src="<%=listing.image%>"
+          class="card-img-top"
+          alt="listings_image"
+          style="height: 20rem"
+        />
+      </a>
       <div class="card-body">
         <p class="card-text">
           <b><%=listing.title%></b> <br />

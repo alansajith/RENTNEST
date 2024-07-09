@@ -1,18 +1,17 @@
 <% layout("/Layouts/boilerplate")%>
-<body>
-  <h5>Listing Details</h5>
-  <ul>
-    <li><%=details.title%></li>
-    <li><%=details.description%></li>
-    <li>&#8377;<%=details.price.toLocaleString("en-IN")%></li>
-    <li><%=details.location%></li>
-    <li><%=details.country%></li>
-  </ul>
-  <form method="get" action="/listings/<%=details._id%>/edit">
-    <button>Edit</button>
-  </form>
-  <br />
-  <form method="post" action="/listings/<%=details._id%>?_method=DELETE">
-    <button>Delete</button>
-  </form>
-</body>
+
+<h5>Listing Details</h5>
+<ul>
+  <li><%=details.title%></li>
+  <li><%=details.description%></li>
+  <li>&#8377;<%=details.price.toLocaleString("en-IN")%></li>
+  <li><%=details.location%></li>
+  <li><%=details.country%></li>
+</ul>
+<form method="get" action="/listings/<%=details._id%>/edit">
+  <button>Edit</button>
+</form>
+<br />
+<form method="post" action="/listings/<%=details._id%>?_method=DELETE">
+  <button>Delete</button>
+</form>
