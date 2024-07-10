@@ -17,7 +17,7 @@
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="listing[title]" type="text" class="form-control">
+        <textarea name="listing[description]" type="text" class="form-control">
 <%=indlist.description%></textarea
         >
       </div>
@@ -37,7 +37,7 @@
           <label for="price" class="form-label">Price</label>
           <input
             name="listing[price]"
-            type="text"
+            type="number"
             value="<%= indlist.price%>"
             class="form-control"
           />
@@ -46,7 +46,7 @@
         <div class="mb-3 col-8">
           <label for="location" class="form-label">Location</label>
           <input
-            name="listing[Location]"
+            name="listing[location]"
             type="text"
             value="<%= indlist.location%>"
             class="form-control"
@@ -63,10 +63,7 @@
           class="form-control"
         />
       </div>
-
-      <button class="btn btn-dark">Enter</button>
-
-      <br /><br />
+      <button class="btn btn-dark">Enter</button><br /><br />
     </form>
   </div>
 </div>
