@@ -15,7 +15,7 @@
       <div class="text" style="font-size: small">
         <p>
           <%= details.description %><br />
-          &#8377;<%=details.price%><br />
+          &#8377;<%=details.price%>/-<br />
           <%=details.location%><br />
           <%=details.country%>
         </p>
@@ -29,10 +29,10 @@
       </div>
       <div class="col-3">
         <form method="post" action="/listings/<%=details._id%>?_method=DELETE">
-          <button class="btn" style="background-color: red; color: white;">
+          <button class="btn" style="background-color: red; color: white">
             Delete
           </button>
-          <br /><br>
+          <br /><br />
         </form>
       </div>
     </div>
