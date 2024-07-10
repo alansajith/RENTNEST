@@ -31,7 +31,6 @@
 }
 .f-info-terms {
   width: 100%;
-  
 }
 .f-info-socials i {
   margin-right: 1.2rem;
@@ -71,11 +70,22 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-.body {
+.bd {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 .container {
   flex: 1;
+}
+
+.show-img {
+  height: 30vh;
+  border-radius: 1rem !important;
+}
+
+.h5-show {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
