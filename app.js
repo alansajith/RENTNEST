@@ -5,6 +5,7 @@ const listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
+const errorexpress = require("./errormiddleware/errorexpress.js");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -28,6 +29,12 @@ app.listen(8080, () => {
   console.log("Server is Listening on port 8080");
 });
 
+//error handling middleware
+app.use((err, req, res, next) => {
+  let { status = 500, message = "some error has occured" } = err;
+  res.status(status).send(message);
+});
+
 //Index Route
 app.get("/listings", async (req, res) => {
   let alllistings = await listing.find({});
@@ -45,9 +52,12 @@ app.get("/listings/new", (req, res) => {
 });
 
 //show Route
-app.get("/listings/:id", async (req, res) => {
+app.get("/listings/:id", async (req, res, next) => {
   let { id } = req.params;
   let details = await listing.findById(id);
+  if (!details) {
+    next(new errorexpress(404, "Id not found in the database"));
+  }
   res.render("show.ejs", { details });
 });
 
