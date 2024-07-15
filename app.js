@@ -55,9 +55,6 @@ app.get("/listings/new", (req, res) => {
 app.get("/listings/:id", async (req, res, next) => {
   let { id } = req.params;
   let details = await listing.findById(id);
-  if (!details) {
-    next(new errorexpress(404, "Id not found in the database"));
-  }
   res.render("show.ejs", { details });
 });
 
@@ -68,14 +65,15 @@ app.get("/listings/:id/edit", async (req, res) => {
   res.render("edit.ejs", { indlist });
 });
 
-//delete route
-
 //create route
-app.post("/listings", async (req, res) => {
-  const newlisting = new listing(req.body.listing);
-  await newlisting.save();
-  res.redirect("/listings");
-});
+app.post(
+  "/listings",
+  asyncWrap(async (req, res) => {
+    const newlisting = new listing(req.body.listing);
+    await newlisting.save();
+    res.redirect("/listings");
+  })
+);
 
 //update route
 app.put("/listings/:id", async (req, res) => {
@@ -92,3 +90,12 @@ app.delete("/listings/:id", async (req, res) => {
   await listing.findByIdAndDelete(id);
   res.redirect("/listings");
 });
+
+//wrapasync
+function asyncWrap(fn) {
+  return function (req, res, next) {
+    fn(req, res, next).catch((err) =>
+      next(err)
+    );
+  };
+}
