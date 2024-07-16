@@ -1,3 +1,4 @@
+const { urlencoded } = require("express");
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
@@ -11,12 +12,6 @@ const listingSchema = new schema({
   },
   image: {
     type: String,
-    default:
-      "https://images.fineartamerica.com/images-medium-large-5/two-palm-trees-on-an-exotic-beach-in-gerisima.jpg",
-    set: (v) =>
-      v === " "
-        ? "https://images.fineartamerica.com/images-medium-large-5/two-palm-trees-on-an-exotic-beach-in-gerisima.jpg"
-        : v,
   },
   price: {
     type: Number,
