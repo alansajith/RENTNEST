@@ -12,7 +12,10 @@ const listingSchema = new schema({
   },
   image: {
     type: String,
+    default:
+      "https://unsplash.com/photos/an-abstract-image-of-a-white-object-with-a-gray-background-Hp-KRSsV4H0",
   },
+
   price: {
     type: Number,
     required: true,
