@@ -7,8 +7,8 @@ const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
 const errorexpress = require("./errormiddleware/errorexpress.js");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true }));//Middlewares
+app.use(methodOverride("_method"));//Middlewares
 app.engine("ejs", ejsMAte);
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
 
 //Index Route
 app.get("/listings", async (req, res) => {
-  let alllistings = await listing.find({});
+  let alllistings = await listing.find({}); //.find({}) checks for everything
   res.render("index.ejs", { alllistings });
 });
 
