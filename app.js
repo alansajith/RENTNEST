@@ -26,10 +26,6 @@ async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/RENTNEST");
 }
 
-app.use((err,req, res, next) => {
-  res.send("Something went wrong");
-});
-
 app.listen(8080, () => {
   console.log("Server is Listening on port 8080");
 });
@@ -67,12 +63,16 @@ app.get("/listings/:id/edit", async (req, res) => {
 //create route
 app.post(
   "/listings",
-  wrapasync(async (req, res) => {
+  wrapasync(async (req, res, next) => {
     const newlisting = new listing(req.body.listing);
     await newlisting.save();
     res.redirect("/listings");
   })
 );
+
+app.use((err, req, res, next) => {
+  res.send("Something went wrong");
+});
 
 //update route
 app.put("/listings/:id", async (req, res) => {
