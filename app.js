@@ -5,8 +5,8 @@ const listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
-const errorexpress = require("./errormiddleware/errorexpress.js");
 const wrapasync = require("./utilis/wrapasync.js");
+const errorexpress = require("./utilis/ExpressError.js");
 
 app.use(express.urlencoded({ extended: true })); //Middlewares
 app.use(methodOverride("_method")); //Middlewares
@@ -70,10 +70,6 @@ app.post(
   })
 );
 
-app.use((err, req, res, next) => {
-  res.send("Something went wrong");
-});
-
 //update route
 app.put("/listings/:id", async (req, res) => {
   let { id } = req.params;
@@ -88,4 +84,13 @@ app.delete("/listings/:id", async (req, res) => {
   let { id } = req.params;
   await listing.findByIdAndDelete(id);
   res.redirect("/listings");
+});
+
+app.all("*", (req, res, next) => {
+  next(new errorexpress(404, "Page Not Found"));
+});
+
+app.use((err, req, res, next) => {
+  let { status = 500, message = "something went wrong" } = err;
+  res.status(status).send(message);
 });
