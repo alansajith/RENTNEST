@@ -6,9 +6,10 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
 const errorexpress = require("./errormiddleware/errorexpress.js");
+const wrapasync = require("./utilis/wrapasync.js");
 
-app.use(express.urlencoded({ extended: true }));//Middlewares
-app.use(methodOverride("_method"));//Middlewares
+app.use(express.urlencoded({ extended: true })); //Middlewares
+app.use(methodOverride("_method")); //Middlewares
 app.engine("ejs", ejsMAte);
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -25,14 +26,12 @@ async function main() {
   await mongoose.connect("mongodb://127.0.0.1:27017/RENTNEST");
 }
 
-app.listen(8080, () => {
-  console.log("Server is Listening on port 8080");
+app.use((req, res, next) => {
+  res.send("Something went wrong");
 });
 
-//error handling middleware
-app.use((err, req, res, next) => {
-  let { status = 500, message = "some error has occured" } = err;
-  res.status(status).send(message);
+app.listen(8080, () => {
+  console.log("Server is Listening on port 8080");
 });
 
 //Index Route
@@ -68,7 +67,7 @@ app.get("/listings/:id/edit", async (req, res) => {
 //create route
 app.post(
   "/listings",
-  asyncWrap(async (req, res) => {
+  wrapasync(async (req, res) => {
     const newlisting = new listing(req.body.listing);
     await newlisting.save();
     res.redirect("/listings");
@@ -90,12 +89,3 @@ app.delete("/listings/:id", async (req, res) => {
   await listing.findByIdAndDelete(id);
   res.redirect("/listings");
 });
-
-//wrapasync
-function asyncWrap(fn) {
-  return function (req, res, next) {
-    fn(req, res, next).catch((err) =>
-      next(err)
-    );
-  };
-}
