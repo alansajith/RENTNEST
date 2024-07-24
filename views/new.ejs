@@ -13,6 +13,10 @@
           class="form-control"
           required
         />
+        <div class="valid-feedback">Title Looks good!!</div>
+        <div class="invalid-feedback">
+          Enter valid Title
+        </div>
       </div>
 
       <div class="mb-3">
@@ -42,10 +46,10 @@
           <input
             name="listing[price]"
             placeholder="Rs"
-            type="number"
             class="form-control"
             required
           />
+          <div class="invalid-feedback">Enter valid price / No words</div>
         </div>
 
         <div class="mb-3 col-8">
@@ -57,6 +61,7 @@
             class="form-control"
             required
           />
+          <div class="invalid-feedback">Enter valid Location</div>
         </div>
       </div>
 
@@ -69,6 +74,7 @@
           class="form-control"
           required
         />
+        <div class="invalid-feedback">Enter valid country</div>
       </div>
       <button class="btn btn-dark">Add</button>
     </form>
