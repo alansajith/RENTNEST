@@ -47,11 +47,14 @@ app.get("/listings/new", (req, res) => {
 });
 
 //show Route
-app.get("/listings/:id", async (req, res, next) => {
-  let { id } = req.params;
-  let details = await listing.findById(id);
-  res.render("show.ejs", { details });
-});
+app.get(
+  "/listings/:id",
+  wrapasync(async (req, res, next) => {
+    let { id } = req.params;
+    let details = await listing.findById(id);
+    res.render("show.ejs", { details });
+  })
+);
 
 //edit route
 app.get("/listings/:id/edit", async (req, res) => {
@@ -71,20 +74,26 @@ app.post(
 );
 
 //update route
-app.put("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await listing.findByIdAndUpdate(id, {
-    ...req.body.listing,
-  }); //deconstruct
-  res.redirect("/listings");
-});
+app.put(
+  "/listings/:id",
+  wrapasync(async (req, res) => {
+    let { id } = req.params;
+    await listing.findByIdAndUpdate(id, {
+      ...req.body.listing,
+    }); //deconstruct
+    res.redirect("/listings");
+  })
+);
 
 //delete route
-app.delete("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await listing.findByIdAndDelete(id);
-  res.redirect("/listings");
-});
+app.delete(
+  "/listings/:id",
+  wrapasync(async (req, res) => {
+    let { id } = req.params;
+    await listing.findByIdAndDelete(id);
+    res.redirect("/listings");
+  })
+);
 
 app.all("*", (req, res, next) => {
   next(new errorexpress(404, "Page Not Found"));
