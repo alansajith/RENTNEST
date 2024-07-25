@@ -38,7 +38,7 @@ app.get("/listings", async (req, res) => {
 
 //Home
 app.get("/", (req, res) => {
-  res.send("Page not made yet...will get back aftersometime");
+  throw new errorexpress(404, "Page Not Found");
 });
 
 //new route
@@ -101,5 +101,5 @@ app.all("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
   let { status = 500, message = "something went wrong" } = err;
-  res.status(status).send(message);
+  res.render("error.ejs", { message, status });
 });
