@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
 const wrapasync = require("./utilis/wrapasync.js");
 const errorexpress = require("./utilis/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
 app.use(express.urlencoded({ extended: true })); //Middlewares
 app.use(methodOverride("_method")); //Middlewares
@@ -67,6 +68,7 @@ app.get("/listings/:id/edit", async (req, res) => {
 app.post(
   "/listings",
   wrapasync(async (req, res, next) => {
+    listingSchema.validate(req.body);
     const newlisting = new listing(req.body.listing);
     await newlisting.save();
     res.redirect("/listings");
