@@ -5,9 +5,12 @@ const listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
+const wrapasync = require("./utilis/wrapasync.js");
+const errorexpress = require("./utilis/ExpressError.js");
+const { listingSchema } = require("./schema.js");
 
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride("_method"));
+app.use(express.urlencoded({ extended: true })); //Middlewares
+app.use(methodOverride("_method")); //Middlewares
 app.engine("ejs", ejsMAte);
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -30,13 +33,13 @@ app.listen(8080, () => {
 
 //Index Route
 app.get("/listings", async (req, res) => {
-  let alllistings = await listing.find({});
+  let alllistings = await listing.find({}); //.find({}) checks for everything
   res.render("index.ejs", { alllistings });
 });
 
 //Home
 app.get("/", (req, res) => {
-  res.send("Page not made yet...will get back aftersometime");
+  throw new errorexpress(404, "Page Not Found");
 });
 
 //new route
@@ -45,11 +48,14 @@ app.get("/listings/new", (req, res) => {
 });
 
 //show Route
-app.get("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  let details = await listing.findById(id);
-  res.render("show.ejs", { details });
-});
+app.get(
+  "/listings/:id",
+  wrapasync(async (req, res, next) => {
+    let { id } = req.params;
+    let details = await listing.findById(id);
+    res.render("show.ejs", { details });
+  })
+);
 
 //edit route
 app.get("/listings/:id/edit", async (req, res) => {
@@ -58,27 +64,44 @@ app.get("/listings/:id/edit", async (req, res) => {
   res.render("edit.ejs", { indlist });
 });
 
-//delete route
-
 //create route
-app.post("/listings", async (req, res) => {
-  const newlisting = new listing(req.body.listing);
-  await newlisting.save();
-  res.redirect("/listings");
-});
+app.post(
+  "/listings",
+  wrapasync(async (req, res, next) => {
+    listingSchema.validate(req.body);
+    const newlisting = new listing(req.body.listing);
+    await newlisting.save();
+    res.redirect("/listings");
+  })
+);
 
 //update route
-app.put("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await listing.findByIdAndUpdate(id, {
-    ...req.body.listing,
-  }); //deconstruct
-  res.redirect("/listings");
-});
+app.put(
+  "/listings/:id",
+  wrapasync(async (req, res) => {
+    let { id } = req.params;
+    await listing.findByIdAndUpdate(id, {
+      ...req.body.listing,
+    }); //deconstruct
+    res.redirect("/listings");
+  })
+);
 
 //delete route
-app.delete("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  await listing.findByIdAndDelete(id);
-  res.redirect("/listings");
+app.delete(
+  "/listings/:id",
+  wrapasync(async (req, res) => {
+    let { id } = req.params;
+    await listing.findByIdAndDelete(id);
+    res.redirect("/listings");
+  })
+);
+
+app.all("*", (req, res, next) => {
+  next(new errorexpress(404, "Page Not Found"));
+});
+
+app.use((err, req, res, next) => {
+  let { status = 500, message = "something went wrong" } = err;
+  res.render("error.ejs", { message, status });
 });
