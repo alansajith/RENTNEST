@@ -9,7 +9,7 @@ const wrapasync = require("./utilis/wrapasync.js");
 const errorexpress = require("./utilis/ExpressError.js");
 const { listingSchema } = require("./schema.js");
 
-app.use(express.urlencoded({ extended: true })); //Middlewares
+app.use(express.urlencoded({ extended: true })); //Middlewares sd
 app.use(methodOverride("_method")); //Middlewares
 app.engine("ejs", ejsMAte);
 app.use(express.static(path.join(__dirname, "public")));
