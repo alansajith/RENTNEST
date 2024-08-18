@@ -1,5 +1,6 @@
 const { required } = require("joi");
 const mongoose = require("mongoose");
+const review = require("./review");
 const schema = mongoose.Schema;
 
 const listingSchema = new schema({
@@ -33,6 +34,12 @@ const listingSchema = new schema({
   country: {
     type: String,
   },
+  reviews: [
+    {
+      type: schema.Types.ObjectId,
+      ref: "review",
+    },
+  ],
 });
 
 const listing = mongoose.model("Listing", listingSchema);
