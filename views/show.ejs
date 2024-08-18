@@ -32,9 +32,34 @@
           <button class="btn" style="background-color: red; color: white">
             Delete
           </button>
-          <br /><br />
         </form>
       </div>
+    </div>
+    <hr />
+    <div>
+      <h6>Leave a Review</h6>
+      <form class="mt-3 mb-3 col-6">
+        <div style="font-size: small">
+          <label for="rating" class="form-label">Rating</label>
+          <input
+            type="range"
+            min="1"
+            max="5"
+            id="rating"
+            name="review[rating]"
+          />
+        </div>
+        <div class="mb-3" style="font-size: small">
+          <label for="comment" class="form-label">Comments</label>
+          <textarea
+            id="comment"
+            name="review[comment]"
+            class="form-control"
+            placeholder="How did your stay go??"
+          ></textarea>
+        </div>
+        <button class="btn btn-outline-dark">Submit</button>
+      </form>
     </div>
   </div>
 </div>
