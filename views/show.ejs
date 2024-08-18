@@ -2,7 +2,7 @@
 
 <div class="row mt-3">
   <div class="col-8 offset-2">
-    <h5 class="h5-show">Listing Details</h5>
+    <h5 class="h5-show"><%=details.title%></h5>
   </div>
   <div class="card-show col-6 offset-2">
     <img
@@ -11,12 +11,12 @@
       alt="details_image"
     />
     <div class="card-body">
-      <h5 class="card-title" style="font-size: medium"><%=details.title%></h5><br>
+      <h5 class="card-title" style="font-size: medium"></h5>
+      <br />
       <div class="text" style="font-size: small">
+        <p><%= details.description %><br /></p>
         <p>
-          <%= details.description %><br />
-          <p> &#8377;<b><%=details.price%></b>/night</p>
-          <%=details.location%><br />
+          &#8377;<b><%=details.price%></b>/night <%=details.location%><br />
           <%=details.country%>
         </p>
       </div>
