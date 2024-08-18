@@ -58,11 +58,14 @@ app.get(
 );
 
 //edit route
-app.get("/listings/:id/edit", async (req, res) => {
-  let { id } = req.params;
-  let indlist = await listing.findById(id);
-  res.render("edit.ejs", { indlist });
-});
+app.get(
+  "/listings/:id/edit",
+  wrapasync(async (req, res) => {
+    let { id } = req.params;
+    let indlist = await listing.findById(id);
+    res.render("edit.ejs", { indlist });
+  })
+);
 
 //create route
 app.post(
