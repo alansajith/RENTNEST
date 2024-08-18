@@ -1,9 +1,9 @@
 class errorexpress extends Error {
-    constructor(status, message) {
-      super();
-      this.status = status;
-      this.message = message;
-    }
+  constructor(status, message) {
+    super();
+    this.status = status;
+    this.message = message;
   }
-  
-  module.exports = errorexpress;
+}
+
+module.exports = errorexpress;
