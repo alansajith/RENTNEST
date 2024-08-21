@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { listingSchema } = require("../schema.js");
 const wrapasync = require("../utilis/wrapasync.js");
-const errorexpress = require("../utilis/ExpressError.js");
 const listing = require("../models/listing.js");
 
 //Index Route
@@ -19,7 +18,7 @@ router.get("/new", (req, res) => {
 //show Route
 router.get(
   "/:id",
-  wrapasync(async (req, res, next) => {
+  wrapasync(async (req, res) => {
     let { id } = req.params;
     let details = await listing.findById(id);
     res.render("show.ejs", { details });
@@ -39,7 +38,7 @@ router.get(
 //create route
 router.post(
   "/",
-  wrapasync(async (req, res, next) => {
+  wrapasync(async (req, res) => {
     listingSchema.validate(req.body);
     const newlisting = new listing(req.body.listing);
     await newlisting.save();

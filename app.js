@@ -10,9 +10,7 @@ const listing = require("./routes/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMAte = require("ejs-mate");
-const wrapasync = require("./utilis/wrapasync.js");
 const errorexpress = require("./utilis/ExpressError.js");
-const { listingSchema } = require("./schema.js");
 
 app.use(express.urlencoded({ extended: true })); //Middlewares sd
 app.use(methodOverride("_method")); //Middlewares
