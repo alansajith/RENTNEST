@@ -89,3 +89,9 @@
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
+
+/*map*/
+#map {
+  height: 400px;
+  width: 600px;
+}
