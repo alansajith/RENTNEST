@@ -3,6 +3,7 @@ const router = express.Router();
 const { listingSchema } = require("../schema.js");
 const wrapasync = require("../utilis/wrapasync.js");
 const listing = require("../models/listing.js");
+const errorexpress = require("../utilis/ExpressError.js");
 
 //Index Route
 router.get("/", async (req, res) => {
@@ -10,6 +11,15 @@ router.get("/", async (req, res) => {
   res.render("index.ejs", { alllistings });
 });
 
+const validatelisting = (req, res, next) => {
+  let { error } = listingSchema.validate(req.body);
+  if (error) {
+    let errMessage = error.details.map((el) => el.message).join(",");
+    throw new errorexpress(400, errMessage);
+  } else {
+    next();
+  }
+};
 //new route
 router.get("/new", (req, res) => {
   res.render("new.ejs");
@@ -18,7 +28,7 @@ router.get("/new", (req, res) => {
 //show Route
 router.get(
   "/:id",
-  wrapasync(async (req, res,next) => {
+  wrapasync(async (req, res) => {
     let { id } = req.params;
     let details = await listing.findById(id);
     res.render("show.ejs", { details });
@@ -28,7 +38,8 @@ router.get(
 //edit route
 router.get(
   "/:id/edit",
-  wrapasync(async (req, res,next) => {
+  validatelisting,
+  wrapasync(async (req, res) => {
     let { id } = req.params;
     let indlist = await listing.findById(id);
     res.render("edit.ejs", { indlist });
@@ -38,8 +49,8 @@ router.get(
 //create route
 router.post(
   "/",
-  wrapasync(async (req, res,next) => {
-    listingSchema.validate(req.body);
+  validatelisting,
+  wrapasync(async (req, res, next) => {
     const newlisting = new listing(req.body.listing);
     await newlisting.save();
     res.redirect("/listings");
@@ -49,7 +60,8 @@ router.post(
 //update route
 router.put(
   "/:id",
-  wrapasync(async (req, res,next) => {
+  validatelisting,
+  wrapasync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndUpdate(id, {
       ...req.body.listing,
@@ -61,7 +73,7 @@ router.put(
 //delete route
 router.delete(
   "/:id",
-  wrapasync(async (req, res,next) => {
+  wrapasync(async (req, res) => {
     let { id } = req.params;
     await listing.findByIdAndDelete(id);
     res.redirect("/listings");
