@@ -38,7 +38,6 @@ router.get(
 //edit route
 router.get(
   "/:id/edit",
-  validatelisting,
   wrapasync(async (req, res) => {
     let { id } = req.params;
     let indlist = await listing.findById(id);
